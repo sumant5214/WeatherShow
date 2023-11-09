@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="shortcut icon" href="WS - Copy.png" type="image/x-icon">
+    <title>WeatherShow</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #1c2131;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("./cityback.jpg");
+            background-repeat: no-repeat;
+            background-size: inherit;
+            background-size: cover;
+            background-position: center;
+        }
+        .location{
+            display: flex;
+            background-color: #F9B572;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-left: 1px;
+            width: 370px;
+            border-radius: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        .dis-weather{
+            background-color: #F9B572;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            width: 370px;
+            height: 130px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        .dis-weather5{
+            background-color: rgba(128, 128, 128, 0);
+            display: flex;
+            gap: 10px;
+            padding: 10px 0px 10px 0px;
+            width: 390px;
+            height: 90px;
+            border-radius: 10px;
+        }
+        .dis-weather5bef{
+            display: none;
+            visibility: hidden;
+        }
+        .dis-weather5af{
+            animation: load-dis5 0.5s ease-in-out;
+        }
+        @keyframes load-dis5{
+            from{display: none;visibility: hidden;}
+            to{display: flex;visibility: visible;}
+        }
+        .day-cards-temp{
+            background-color: beige;
+            width: 78px;
+            max-width: 78px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 10pt;
+            row-gap: 7px;
+            transform: translateY(-100px);
+        }
+        .card1-disbef{
+            display: none;
+            visibility: hidden;
+        }
+        .card1-disaf{
+            display: flex;
+            visibility: visible;
+            animation:  card-ani 0.7s ease-out;
+            transform: translateY(0px);
+            z-index: 0;
+            width: 78px;
+            max-width: 78px;
+        }
+        .card2-disbef{
+            display: none;
+            visibility: hidden;
+        }
+        .card2-disaf{
+            display: flex;
+            visibility: visible;
+            animation:  card-ani 0.7s ease-out;
+            transform: translateY(0px);
+            z-index: 0;
+            width: 78px;
+            max-width: 78px;
+        }
+        .card3-disbef{
+            display: none;
+            visibility: hidden;
+        }
+        .card3-disaf{
+            display: flex;
+            visibility: visible;
+            animation:  card-ani 0.7s ease-out;
+            transform: translateY(0px);
+            z-index: 0;
+            width: 78px;
+            max-width: 78px;
+        }
+        .card4-disbef{
+            display: none;
+            visibility: hidden;
+        }
+        .card4-disaf{
+            display: flex;
+            visibility: visible;
+            animation:  card-ani 0.7s ease-out;
+            transform: translateY(0px);
+            z-index: 0;
+            width: 78px;
+            max-width: 78px;
+        }
+        .card5-disbef{
+            display: none;
+            visibility: hidden;
+        }
+        .card5-disaf{
+            display: flex;
+            visibility: visible;
+            animation:  card-ani 0.7s ease-out;
+            transform: translateY(0px);
+            z-index: 0;
+            width: 78px;
+            max-width: 78px;
+        }
+        @keyframes card-ani{
+            from{transform: translateY(-100px);}
+            to{transform: translateY(0px);}
+        }
+        .search-bar{
+            border-radius: 100px;
+            border-style: none;
+            padding: 13px;
+            width: 370px;
+            outline: none;
+        }
+        .ctname-temp{
+            display: flex;
+
+        }
+        input[value="Go"]{
+            background-color: #F9B572;
+            border-style: none;
+            height: 33px;
+            padding: 0px 20px 0px 0px;
+            border-radius: 100px 100px 100px 100px;
+            width: 55px;
+            display: flex;
+            flex-direction: row;
+            justify-content: right;
+            position: absolute;
+            margin-right: 5px;
+        }
+        .search-div{
+            display: flex;
+            height: inherit;
+            justify-content: right;
+            align-items: center;
+        }
+        input[value="Go"]:hover{
+            animation: gobut 0.5s linear;
+            cursor: pointer;
+        }
+        .main-temp{
+            font-size:44pt;
+            font-weight: 700;
+            display: flex;
+            height: max-content;
+        }
+        .details-temp{
+            display: flex;
+            flex-direction: column;
+        }
+        .deldivs{
+            font-size: 8pt;
+            display: flex;
+            align-items: center;
+        }
+        .maindel-temp{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            height: min-content;
+            align-items: center;
+        }
+        .myicon{
+            
+        }
+        .moredels-temp{
+            display: flex;
+            justify-content: space-evenly;
+            font-size: 8pt;
+        }
+        .moredels-ind{
+            display: flex;
+            align-items: center;
+        }
+        footer{
+            background-color: #5A5A5A;
+            display: none;
+            visibility: hidden;
+            position: absolute;
+            top: 97.5vh;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            height: 10vh;
+        }
+        .header{
+            position: fixed;
+            top: 0;
+            background-color: #1c2131;
+            width: 100%;
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            padding-left: 100px;
+            color: whitesmoke;
+            font-size: 24pt;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            box-shadow: 2px 2px 15px black;
+        }
+        .div-main{
+            margin-top: 130px;
+        }
+        @keyframes gobut{
+            10%{background-color: bisque;}
+            50%{background-color: brown;}
+            70%{background-color: #F9D949;}
+            100%{background-color: #F9B572;}
+        }
+        @media (max-width: 500px){
+            .day-cards-temp{
+                width: 60%;
+            }
+            .search-div{
+                width: 80%;
+            }
+            .location{
+                width: 74%;
+            }
+            .dis-weather{
+                width: 74%;
+            }
+            .dis-weather5{
+                width: 79%;
+            }
+            .div-main{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .header{
+                font-size: 24pt;
+                height: 15vh;
+                width: 1000px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0%;
+                margin-right: 0%;
+            }
+        }
+    </style>
+</head>
+<body onload="setcontent()">
+<div id="head" class="header">
+    Weather<div style="color: #F9B572;">Show</div>
+</div>
+<div class="div-main">
+    <div class="search-div">
+        <input type="text" name="" class="search-bar" id="searchbar" placeholder="Search a city to view temperature">
+        <input type="button" value="Go" onclick="searchtemp()">
+    </div>
+    <div class="location">
+        <span class="material-symbols-outlined">location_on</span><span id="ct-name">Mumbai, IN</span>
+    </div>
+    <div class="dis-weather">
+        <div class="maindel-temp">
+            <div id="show" class="main-temp">
+                
+            </div>
+            <div id="del" class="details-temp">
+                <div id="max" class="deldivs">&nbsp;<span class="material-symbols-outlined myicon">thermometer_gain</span>&nbsp;&nbsp;--°C</div>
+                <div id="min" class="deldivs">&nbsp;<span class="material-symbols-outlined">thermometer_loss</span>&nbsp;&nbsp;--°C</div>
+            </div>
+        </div>
+        <div class="moredels-temp">
+            <div class="moredels-ind"><span class="material-symbols-outlined">mist</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="humid">--</span></div>
+            <div class="moredels-ind"><span class="material-symbols-outlined">air</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="wind">--</span></div>
+            <div class="moredels-ind"><span class="material-symbols-outlined" id="d0ic">sunny</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="desc">--</span></div>
+            <div id="fl" class="moredels-ind"><span class="material-symbols-outlined">mood</span>&nbsp;&nbsp;&nbsp;--°C</div>
+        </div>
+    </div>
+    <div id="wea-dis5" class="dis-weather5 dis-weather5bef">
+        <div class="day-cards-temp card1-disbef" id="cd1">Day 1<span class="material-symbols-outlined" id="d1ic">sunny</span><span id="d1">--°C</span></div>
+        <div class="day-cards-temp card2-dis" id="cd2">Day 2<span class="material-symbols-outlined" id="d2ic">sunny</span><span id="d2">--°C</span></div>
+        <div class="day-cards-temp card3-dis" id="cd3">Day 3<span class="material-symbols-outlined" id="d3ic">sunny</span><span id="d3">--°C</span></div>
+        <div class="day-cards-temp card4-dis" id="cd4">Day 4<span class="material-symbols-outlined" id="d4ic">sunny</span><span id="d4">--°C</span></div>
+        <div class="day-cards-temp card5-dis" id="cd5">Day 5<span class="material-symbols-outlined" id="d5ic">sunny</span><span id="d5">--°C</span></div>
+    </div>
+</div>
+<footer id="foot">
+    Copyright &#169; 2023, WeatherShow. All Rights Reserved.
+</footer>
+<script>
+    window.addEventListener("scroll",function(){
+        if(window.scrollY > 15){
+            document.getElementById("foot").style.display = 'flex';
+            document.getElementById("foot").style.visibility = 'visible';
+        }
+        if(window.scrollY < 15){
+            document.getElementById("foot").style.display = 'none';
+            document.getElementById("foot").style.visibility = 'hidden';
+        }
+    });
+    function plcholadd(){
+        setInterval(function(){
+            if(ctr>0)
+                document.getElementById("searchbar").placeholder = "Search a city to view temperature";
+            setTimeout(function(){
+                document.getElementById("searchbar").placeholder = "To make it more precise use country code";
+            },3000);
+            ctr++;
+        },9000);
+    }
+    var mainctr = 0;
+    function setcontent(){
+        ctr = 0;navigator.geolocation.getCurrentPosition(success);
+                function success(pos) {
+                    const crd = pos.coords;
+                    lat = Number(crd.latitude);
+                    lon = crd.longitude;
+                    fetch("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=83db5da61369128211165f58a1646f01&units=metric")
+        .then((students) => {
+            return students.json();
+        })
+        .then((val) => {
+                console.log(val);
+                document.getElementById("ct-name").innerText = val.city.name + ", " + val.city.country;
+                document.getElementById("show").innerText = val.list[0].main.temp + "°C";
+                document.getElementById("humid").innerText = val.list[0].main.humidity;
+                document.getElementById("wind").innerText = val.list[0].wind.speed;
+                document.getElementById("desc").innerText = val.list[0].weather[0].main;
+                document.getElementById("fl").innerHTML = "<span class='material-symbols-outlined'>mood</span>&nbsp;&nbsp;&nbsp;" + val.list[0].main.feels_like + "°C";
+                document.getElementById("max").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_gain</span>&nbsp;&nbsp;" + val.list[0].main.temp_max + "°C";
+                document.getElementById("min").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_loss</span>&nbsp;&nbsp;" + val.list[0].main.temp_min + "°C";
+                document.getElementById("d1").innerText = val.list[1].main.temp + "°C";
+                document.getElementById("d2").innerText = val.list[2].main.temp + "°C";
+                document.getElementById("d3").innerText = val.list[3].main.temp + "°C";
+                document.getElementById("d4").innerText = val.list[4].main.temp + "°C";
+                document.getElementById("d5").innerText = val.list[5].main.temp + "°C";
+                var weadesc = val.list[0].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d0ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d0ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d0ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d0ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d0ic").innerText = "snowing";
+                }
+                var weadesc = val.list[1].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d1ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d1ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d1ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d1ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d1ic").innerText = "snowing";
+                }
+                var weadesc = val.list[2].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d2ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d2ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d2ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d2ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d2ic").innerText = "snowing";
+                }
+                var weadesc = val.list[3].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d3ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d3ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d3ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d3ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d3ic").innerText = "snowing";
+                }
+                var weadesc = val.list[4].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d4ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d4ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d4ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d4ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d4ic").innerText = "snowing";
+                }
+                var weadesc = val.list[5].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d5ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d5ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d5ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d5ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d5ic").innerText = "snowing";
+                }
+                document.getElementById("wea-dis5").classList.remove("dis-weather5bef");
+                document.getElementById("wea-dis5").classList.add("dis-weather5af");
+                setTimeout(function(){
+                    document.getElementById("cd1").classList.remove("card1-disbef");
+                    document.getElementById("cd1").classList.add("card1-disaf");
+                },50);
+                setTimeout(function(){
+                    document.getElementById("cd2").classList.remove("card2-disbef");
+                    document.getElementById("cd2").classList.add("card2-disaf");
+                },150);
+                setTimeout(function(){
+                    document.getElementById("cd3").classList.remove("card3-disbef");
+                    document.getElementById("cd3").classList.add("card3-disaf");
+                },250);
+                setTimeout(function(){
+                    document.getElementById("cd4").classList.remove("card4-disbef");
+                    document.getElementById("cd4").classList.add("card4-disaf");
+                },350);
+                setTimeout(function(){
+                    document.getElementById("cd5").classList.remove("card5-disbef");
+                    document.getElementById("cd5").classList.add("card5-disaf");
+                },450);
+            });
+        setTimeout(function(){
+                document.getElementById("searchbar").placeholder = "To make it more precise use country code";
+            },3000);
+        setInterval(function(){
+            if(ctr>0)
+                document.getElementById("searchbar").placeholder = "Search a city to view temperature";
+            setTimeout(function(){
+                document.getElementById("searchbar").placeholder = "To make it more precise use country code";
+            },3000);
+            ctr++;
+        },9000);
+    }
+}
+    function searchtemp(){
+        var latlon = "";
+    var ctnm = document.getElementById("searchbar").value;
+    
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q="+ctnm+"&appid=83db5da61369128211165f58a1646f01&units=metric")
+        .then((students) => {
+            return students.json();
+        })
+        .then((val) => {
+            if(val.message == "city not found"){
+                navigator.geolocation.getCurrentPosition(success);
+                function success(pos) {
+                    const crd = pos.coords;
+                    lat = Number(crd.latitude);
+                    lon = crd.longitude;
+                    fetch("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=83db5da61369128211165f58a1646f01&units=metric")
+                    .then((students) => {
+                        return students.json();
+                    })
+                    .then((val) => {
+                        if(mainctr>0){
+                    document.getElementById("cd1").classList.remove("card1-disaf");
+                    document.getElementById("cd1").classList.add("card1-disbef");
+                    document.getElementById("cd2").classList.remove("card2-disaf");
+                    document.getElementById("cd2").classList.add("card2-disbef");
+                    document.getElementById("cd3").classList.remove("card3-disaf");
+                    document.getElementById("cd3").classList.add("card3-disbef");
+                    document.getElementById("cd4").classList.remove("card4-disaf");
+                    document.getElementById("cd4").classList.add("card4-disbef");
+                    document.getElementById("cd5").classList.remove("card5-disaf");
+                    document.getElementById("cd5").classList.add("card5-disbef");
+                }
+                console.log(val);
+                document.getElementById("ct-name").innerText = val.city.name + ", " + val.city.country;
+                document.getElementById("show").innerText = val.list[0].main.temp + "°C";
+                document.getElementById("humid").innerText = val.list[0].main.humidity;
+                document.getElementById("wind").innerText = val.list[0].wind.speed;
+                document.getElementById("desc").innerText = val.list[0].weather[0].main;
+                document.getElementById("fl").innerHTML = "<span class='material-symbols-outlined'>mood</span>&nbsp;&nbsp;&nbsp;" + val.list[0].main.feels_like + "°C";
+                document.getElementById("max").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_gain</span>&nbsp;&nbsp;" + val.list[0].main.temp_max + "°C";
+                document.getElementById("min").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_loss</span>&nbsp;&nbsp;" + val.list[0].main.temp_min + "°C";
+                document.getElementById("d1").innerText = val.list[1].main.temp + "°C";
+                document.getElementById("d2").innerText = val.list[2].main.temp + "°C";
+                document.getElementById("d3").innerText = val.list[3].main.temp + "°C";
+                document.getElementById("d4").innerText = val.list[4].main.temp + "°C";
+                document.getElementById("d5").innerText = val.list[5].main.temp + "°C";
+                var weadesc = val.list[0].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d0ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d0ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d0ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d0ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d0ic").innerText = "snowing";
+                }
+                var weadesc = val.list[1].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d1ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d1ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d1ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d1ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d1ic").innerText = "snowing";
+                }
+                var weadesc = val.list[2].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d2ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d2ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d2ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d2ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d2ic").innerText = "snowing";
+                }
+                var weadesc = val.list[3].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d3ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d3ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d3ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d3ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d3ic").innerText = "snowing";
+                }
+                var weadesc = val.list[4].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d4ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d4ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d4ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d4ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d4ic").innerText = "snowing";
+                }
+                var weadesc = val.list[5].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d5ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d5ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d5ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d5ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d5ic").innerText = "snowing";
+                }
+                document.getElementById("wea-dis5").classList.remove("dis-weather5bef");
+                document.getElementById("wea-dis5").classList.add("dis-weather5af");
+                setTimeout(function(){
+                    document.getElementById("cd1").classList.remove("card1-disbef");
+                    document.getElementById("cd1").classList.add("card1-disaf");
+                },50);
+                setTimeout(function(){
+                    document.getElementById("cd2").classList.remove("card2-disbef");
+                    document.getElementById("cd2").classList.add("card2-disaf");
+                },150);
+                setTimeout(function(){
+                    document.getElementById("cd3").classList.remove("card3-disbef");
+                    document.getElementById("cd3").classList.add("card3-disaf");
+                },250);
+                setTimeout(function(){
+                    document.getElementById("cd4").classList.remove("card4-disbef");
+                    document.getElementById("cd4").classList.add("card4-disaf");
+                },350);
+                setTimeout(function(){
+                    document.getElementById("cd5").classList.remove("card5-disbef");
+                    document.getElementById("cd5").classList.add("card5-disaf");
+                },450);
+                mainctr++;
+                    });
+                }
+            }
+            else{
+                if(mainctr>0){
+                    document.getElementById("cd1").classList.remove("card1-disaf");
+                    document.getElementById("cd1").classList.add("card1-disbef");
+                    document.getElementById("cd2").classList.remove("card2-disaf");
+                    document.getElementById("cd2").classList.add("card2-disbef");
+                    document.getElementById("cd3").classList.remove("card3-disaf");
+                    document.getElementById("cd3").classList.add("card3-disbef");
+                    document.getElementById("cd4").classList.remove("card4-disaf");
+                    document.getElementById("cd4").classList.add("card4-disbef");
+                    document.getElementById("cd5").classList.remove("card5-disaf");
+                    document.getElementById("cd5").classList.add("card5-disbef");
+                }
+                console.log(val);
+                document.getElementById("ct-name").innerText = val.city.name + ", " + val.city.country;
+                document.getElementById("show").innerText = val.list[0].main.temp + "°C";
+                document.getElementById("humid").innerText = val.list[0].main.humidity;
+                document.getElementById("wind").innerText = val.list[0].wind.speed;
+                document.getElementById("desc").innerText = val.list[0].weather[0].main;
+                document.getElementById("fl").innerHTML = "<span class='material-symbols-outlined'>mood</span>&nbsp;&nbsp;&nbsp;" + val.list[0].main.feels_like + "°C";
+                document.getElementById("max").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_gain</span>&nbsp;&nbsp;" + val.list[0].main.temp_max + "°C";
+                document.getElementById("min").innerHTML = "&nbsp;<span class='material-symbols-outlined'>thermometer_loss</span>&nbsp;&nbsp;" + val.list[0].main.temp_min + "°C";
+                document.getElementById("d1").innerText = val.list[1].main.temp + "°C";
+                document.getElementById("d2").innerText = val.list[2].main.temp + "°C";
+                document.getElementById("d3").innerText = val.list[3].main.temp + "°C";
+                document.getElementById("d4").innerText = val.list[4].main.temp + "°C";
+                document.getElementById("d5").innerText = val.list[5].main.temp + "°C";
+                var weadesc = val.list[0].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d0ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d0ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d0ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d0ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d0ic").innerText = "snowing";
+                }
+                var weadesc = val.list[1].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d1ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d1ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d1ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d1ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d1ic").innerText = "snowing";
+                }
+                var weadesc = val.list[2].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d2ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d2ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d2ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d2ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d2ic").innerText = "snowing";
+                }
+                var weadesc = val.list[3].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d3ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d3ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d3ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d3ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d3ic").innerText = "snowing";
+                }
+                var weadesc = val.list[4].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d4ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d4ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d4ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d4ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d4ic").innerText = "snowing";
+                }
+                var weadesc = val.list[5].weather[0].main;
+                if(weadesc == "Clear"){
+                    document.getElementById("d5ic").innerText = "sunny";
+                }
+                else if(weadesc == "Clouds"){
+                    document.getElementById("d5ic").innerText = "cloud";
+                }
+                else if(weadesc == "Thunderstorm"){
+                    document.getElementById("d5ic").innerText = "thunderstorm"; 
+                }
+                else if(weadesc == "Rain"){
+                    document.getElementById("d5ic").innerText = "rainy";
+                }
+                else{
+                    document.getElementById("d5ic").innerText = "snowing";
+                }
+                document.getElementById("wea-dis5").classList.remove("dis-weather5bef");
+                document.getElementById("wea-dis5").classList.add("dis-weather5af");
+                setTimeout(function(){
+                    document.getElementById("cd1").classList.remove("card1-disbef");
+                    document.getElementById("cd1").classList.add("card1-disaf");
+                },50);
+                setTimeout(function(){
+                    document.getElementById("cd2").classList.remove("card2-disbef");
+                    document.getElementById("cd2").classList.add("card2-disaf");
+                },150);
+                setTimeout(function(){
+                    document.getElementById("cd3").classList.remove("card3-disbef");
+                    document.getElementById("cd3").classList.add("card3-disaf");
+                },250);
+                setTimeout(function(){
+                    document.getElementById("cd4").classList.remove("card4-disbef");
+                    document.getElementById("cd4").classList.add("card4-disaf");
+                },350);
+                setTimeout(function(){
+                    document.getElementById("cd5").classList.remove("card5-disbef");
+                    document.getElementById("cd5").classList.add("card5-disaf");
+                },450);
+                mainctr++;
+            }
+        });
+    }
+</script>
+</body>
+</html>

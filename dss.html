@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <style>
+            td{
+                padding: 10px;
+            }
+        </style>
+    </head>
+<body>
+    <script>
+        function checkregex(){
+            var str1 = document.getElementById("name").value;
+            var str2 = document.getElementById("eid").value;
+            var str3 = document.getElementById("pc").value;
+            var re1 = new RegExp("^\s{0,}$");
+            var re2 = new RegExp("^\d{6}$");
+            if(re1.test(str1) || re1.test(str2) || re1.test(str3))
+                alert("Please fill entire form");
+            else
+                if(re2.test(str3))
+                    alert("Submitted form successfully");
+                else
+                    alert("Invalid pincode");          
+        }
+    </script>
+    <table border="1" style="border-collapse: collapse;">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="" id="name"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="" id="eid"></td>
+        </tr>
+        <tr>
+            <td>Pin Code</td>
+            <td><input type="text" name="" id="pc"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="display: flex;justify-content: center;border-style: none;"><input type="button" value="Submit" id="" onclick="checkregex()"></td>
+        </tr>
+    </table>
+</body>
+</html>

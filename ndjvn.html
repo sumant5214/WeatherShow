@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var win;
+        function opwin(){
+            win = window.open("","","top=200,left=200,width=500,height=700");
+            win.document.querySelector('body').innerHTML = `
+                <html>
+                    <body>
+                        <iframe 
+                    </body>
+                </html> 
+            `;
+        }
+        
+    </script>
+    <input type="button" value="open" onclick="opwin()">
+</body>
+</html>
